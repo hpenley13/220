@@ -1,8 +1,13 @@
 """
-Name: <your name goes here – first and last>
-<ProgramName>.py
+Name: Harrison Penley
+first.py
+
 """
 
 
 def main():
-    print("The time has come, the Walrus said, To talk of many thing")
+    print("I look forward to learning to control this computer through programming")
+
+
+main()
+
