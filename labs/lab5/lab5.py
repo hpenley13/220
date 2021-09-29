@@ -1,9 +1,10 @@
 """
-Name: <your name goes here – first and last>
-<ProgramName>.py
+Name: Harrison Penley
+lab5.py
 """
 
 from graphics import *
+import math
 
 
 def target():
@@ -22,6 +23,29 @@ def triangle():
     win_width = 500
     win_height = 500
     win = GraphWin("Draw a Triangle", win_width, win_height)
+    p1 = win.getMouse()
+    p2 = win.getMouse()
+    p3 = win.getMouse()
+    triangle = Polygon(p1, p2, p3)
+    dx1 = p1.getX() - p2.getX()
+    dx2 = p2.getX() - p3.getX()
+    dx3 = p3.getX() - p1.getX()
+    dy1 = p1.getY() - p2.getY()
+    dy2 = p2.getY() - p3.getY()
+    dy3 = p3.getY() - p1.getY()
+    side1 = math.sqrt((dx1 ** 2) + (dy1 ** 2))
+    side2 = math.sqrt((dx2 ** 2) + (dy2 ** 2))
+    side3 = math.sqrt((dx3 ** 2) + (dy3 ** 2))
+    perimeter = side1 + side2 + side3
+    s = perimeter / 2
+    area = math.sqrt(s * (s - side1) * (s - side2) * (s - side3))
+    # area = math.sqrt((p1.getX - p2.getX) * (p2.getX - p3.getX) * (p3.getX - p1.getX)
+    triangle.draw(win)
+    perimetertext = Text(Point(250, 25), perimeter)
+    areatext = Text(Point(250, 45), area)
+    perimetertext.draw(win)
+    areatext.draw(win)
+
 
     # Add code here to accept the mouse clicks, draw the triangle.
     # and display its area in the graphics window.
@@ -71,15 +95,76 @@ def color_shape():
     green_text.draw(win)
     blue_text.draw(win)
 
+    red_box = Entry(Point(210, 50), 5)
+    green_box = Entry(Point(210, 70), 5)
+    blue_box = Entry(Point(210, 90), 5)
+    red_box.draw(win)
+    green_box.draw(win)
+    blue_box.draw(win)
+    for i in range(5):
+        win.getMouse()
+        red = int(red_box.getText())
+        blue = int(blue_box.getText())
+        green = int(green_box.getText())
+        color = color_rgb(red, green, blue)
+        shape.setFill(color)
     # Wait for another click to exit
     win.getMouse()
     win.close()
 
+def process_string():
+    s = input("type out a string: ")
+    l = len(s) - 1
+    print(s[0])
+    print(s[l])
+    print(s[2:6])
+    print(s[0]+s[l])
+    print(s[0] * 3, s[1] * 3, s[2] * 3)
+    for c in s:
+        print(c)
+    print(len(s))
+
+def process_list():
+    pt = Point(5, 10)
+    values = [5, "hi", 2.5, "there", pt, "7.2"]
+    x = values[1] + values[3]
+    print(x)
+    x = values[0] + values[2]
+    print(x)
+    x = values[1] * 5
+    print(x)
+    x = values[2:5]
+    print(x)
+    x = values[2:4] + [values[0]]
+    print(x)
+    x = [values[0]] + [values[2]] + [float(values[-1])]
+    print(x)
+    x = values[0] + values[2] + float(values[-1])
+    print(x)
+    x = len(values)
+    print(x)
+
+
+def another_series():
+
+    terms = eval(input("how many terms do you want?: "))
+    acc = 0
+    for i in range(terms):
+        y = 2 + 2 * (i % 3)
+        print(y, end=" ")
+        acc = acc + y
+    print()
+    print("sum =", acc,)
+
+
 
 def main():
-    # target()
-    # triangle()
-    # color_shape()
+    #target()
+    triangle()
+    color_shape()
+    process_string()
+    process_list()
+    another_series()
     pass
 
 
