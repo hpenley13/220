@@ -77,7 +77,7 @@ def main():
     h = win.getHeight()
     radius = 20
     ball1 = Circle(Point(radius + 30, h / 2), radius)
-    ball2 = Circle(Point(w - (radius + 30), h / 2))
+    ball2 = Circle(Point(w - (radius + 30), h / 2), radius)
     get_random_color(ball1)
     get_random_color(ball2)
     ball1.draw(win)
