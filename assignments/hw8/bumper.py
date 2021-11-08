@@ -2,16 +2,16 @@
 Harrison Penley
 bumper.py
 
-Problem: Create a graphics window that displays a randomly launched set of orbs that deflect off of the walls and off
-of one another creating a random pattern.
+Problem: Create a graphics window that displays a randomly launched set of orbs that
+deflect off of the walls and off of one another creating a random pattern.
 
 I certify that this code is entirely my own work
 """
 
-
-from graphics import *
 from time import sleep
 from random import randint
+from graphics import GraphWin, Circle, Point, color_rgb
+
 
 
 def get_random(move_amount):
@@ -41,9 +41,9 @@ def did_collide(ball1, ball2):
 def hit_vertical(ball, win):
     ballcenter = ball.getCenter()
     ballx = ballcenter.getX()
-    radius = ball.getRadius
-    w = win.getWidth()
-    if ballx <= radius or ballx >= (w - radius):
+    radius = ball.getRadius()
+    width = win.getWidth()
+    if ballx <= radius or ballx >= (width - radius):
         result = True
         get_random_color(ball)
     else:
@@ -54,9 +54,9 @@ def hit_vertical(ball, win):
 def hit_horizontal(ball, win):
     ballcenter = ball.getCenter()
     bally = ballcenter.getY()
-    radius = ball.getRadius
-    h = win.getHeight()
-    if bally <= radius or bally >= (h - radius):
+    radius = ball.getRadius()
+    height = win.getHeight()
+    if bally <= radius or bally >= (height - radius):
         result = True
         get_random_color(ball)
     else:
@@ -73,11 +73,11 @@ def get_random_color(circle):
 
 def main():
     win = GraphWin("bumper cars!", 500, 500)
-    w = win.getWidth()
-    h = win.getHeight()
+    width = win.getWidth()
+    height = win.getHeight()
     radius = 20
-    ball1 = Circle(Point(radius + 30, h / 2), radius)
-    ball2 = Circle(Point(w - (radius + 30), h / 2), radius)
+    ball1 = Circle(Point(radius + 30, height / 2), radius)
+    ball2 = Circle(Point(width - (radius + 30), height / 2), radius)
     get_random_color(ball1)
     get_random_color(ball2)
     ball1.draw(win)
@@ -87,16 +87,22 @@ def main():
     v2x = get_random(10)
     v2y = get_random(10)
     velocity = [[v1x, v1y], [v2x, v2y]]
-    for i in range(500):
+
+    for _ in range(500):
         sleep(.04)
         if hit_vertical(ball1, win):
-            velocity[0][0] = -velocity[0][0]
+            velocity[0][0] = - velocity[0][0]
         if hit_vertical(ball2, win):
-            velocity[1][0] = -velocity[1][0]
+            velocity[1][0] = - velocity[1][0]
         if hit_horizontal(ball1, win):
-            velocity[0][1] = -velocity[0][1]
+            velocity[0][1] = - velocity[0][1]
         if hit_horizontal(ball2, win):
-            velocity[1][1] = -velocity[1][1]
+            velocity[1][1] = - velocity[1][1]
+        if did_collide(ball1, ball2):
+            velocity[0][0] = - velocity[0][0]
+            velocity[1][0] = - velocity[1][0]
+            velocity[0][1] = - velocity[0][1]
+            velocity[1][1] = - velocity[1][1]
 
         ball1.move(velocity[0][0], velocity[0][1])
         ball2.move(velocity[1][0], velocity[1][1])
