@@ -73,7 +73,6 @@ def main():
          Rectangle(Point(0, 0), Point(15, 15))]
     rect_sort(y)
     trade_alert("trades.txt")
-
     pass
 
 
